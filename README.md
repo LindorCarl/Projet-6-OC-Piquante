@@ -42,11 +42,10 @@ TOKEN = "XXXXXXXX"
 ```
 
 ### 3. Lancer le projet
-
-Dans le dossier <kbd> :file_folder: frontend </kbd>
-
+<kbd> :file_folder: frontend </kbd>
+- Pour choisir ce dossier  : `cd frontend` 
 - Pour avoir accès au serveur de développement : run `npm start` ou `ng serve` (Rendez-vous sur http://localhost:4200/)
 
-
-Dans le dossier <kbd> :file_folder: backend </kbd>
-- Lancer le serveur : `node server` ou `npm run start` ou `nodemon server`
+<kbd> :file_folder: backend </kbd>
+- Pour choisir ce dossier  : `cd backend` 
+- Pour lancer le serveur : `node server` ou `npm run start` ou `nodemon server`
