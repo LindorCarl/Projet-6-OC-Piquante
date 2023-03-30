@@ -11,25 +11,17 @@ module.exports = (req, res, next) => {
         if(header == null){
             return res.status(401).json({message : "Invalid"});
         }
-
         //Récupérer le token.
         const token = header.split(" ")[1];
-        //Absence du token dans authentification.
-        if(token == null){
-            return res.status(401).json({message : "Token ne peut pas être null"});
-        }
-
         //Décoder le token.
-        jwt.verify(
-            token, `${process.env.TOKEN}`, 
-            (err) => {
-                if(err){
-                    res.status(401).json({message : "Token Invalid" + err});
-                }else{
-                    next();
-                }
-            }
-        );
+        const decodedToken = jwt.verify(token, `${process.env.TOKEN}`);
+        const userId = decodedToken.userId;
+        //Comparer l'userId de la requête à celui du token.
+        if (req.body.userId && req.body.userId !== userId) {
+            throw 'User ID non valable !';
+        } else {
+            next();
+        }
     }catch(error){
         res.status(403).json({
             message : "Echec Authentification",
