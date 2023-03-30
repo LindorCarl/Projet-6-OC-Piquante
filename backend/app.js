@@ -1,8 +1,11 @@
-//Installer et importater le framework "express".
+//Installer et importer le framework "express".
 const express = require("express");
 
 //Créer la variable à exporter.
 const app = express();
+
+//Installer et importer Helmet pour activer la protection de l'application.
+const helmet = require("helmet");
 
 //Importer le fichier database.
 const mongoose = require("../backend/database");
@@ -39,6 +42,10 @@ app.use((req,res,next) => {
 //Transformer le body en JSON. 
 app.use(express.json());
 
+//Configurer de manière appropriée des en-têtes HTTP(sécurité).
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin"}));
+
 //App.use pour utiliser "morgan" sur toutes les routes.
 app.use(morgan("dev"));
 
@@ -52,4 +59,4 @@ app.use("/api", productsRoads);
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 //Exporter app.js pour pouvoir y accéder depuis un autre fichier. 
-module.exports = app
+module.exports = app; 
